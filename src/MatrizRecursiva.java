@@ -4,22 +4,24 @@ public class MatrizRecursiva {
         int linhas = 10;
         int colunas = 4;
 
-        int[][] matriz = criarMatriz(linhas, colunas);
+        int[][] matriz = new int[linhas][colunas];
+        criarMatrizRecursiva(matriz, 0, 0, 1);
 
         exibirMatrizRecursiva(matriz, 0, 0);
     }
 
-    public static int[][] criarMatriz(int linhas, int colunas) {
-        int[][] matriz = new int[linhas][colunas];
-        int valor = 1;
-
-        for (int i = 0; i < linhas; i++) {
-            for (int j = 0; j < colunas; j++) {
-                matriz[i][j] = valor++;
-            }
+    public static void criarMatrizRecursiva(int[][] matriz, int linha, int coluna, int valor) {
+        if (linha >= matriz.length) {
+            return;
         }
 
-        return matriz;
+        matriz[linha][coluna] = valor;
+
+        if (coluna == matriz[0].length - 1) {
+            criarMatrizRecursiva(matriz, linha + 1, 0, valor + 1);
+        } else {
+            criarMatrizRecursiva(matriz, linha, coluna + 1, valor + 1);
+        }
     }
 
     public static void exibirMatrizRecursiva(int[][] matriz, int linha, int coluna) {
